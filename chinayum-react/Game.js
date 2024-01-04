@@ -18,7 +18,8 @@ const Game = () => {
     { name: 'Chǎofàn - 炒饭', image: require('./assets/images/food/fried-rice.jpg') },
     { name: 'Jiǎozi - 饺子', image: require('./assets/images/food/dumplings.jpg') },
     { name: 'Huǒguō - 火锅', image: require('./assets/images/food/hot-pot.jpg') },
-    { name: 'Chǎomiàn - 炒面', image: require('./assets/images/food/chao-mian.png') }
+    { name: 'Chǎomiàn - 炒面', image: require('./assets/images/food/chao-mian.png') },
+    { name: 'Cōngyóubǐng - 葱油饼', image: require('./assets/images/food/scallion-pancake.jpg') }
   ];
 
   useEffect(() => {
