@@ -3,9 +3,9 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const Instructions = ({ navigation }) => (
   <View style={styles.container}>
-    <Text style={styles.title}>Learn to Read a Chinese Menu</Text>
+    <Text style={styles.title}>Learn Chinese Dishes</Text>
     <Text style={styles.instructions}>
-      Select the correct Chinese dish
+      Select the correct dish
     </Text>
     <TouchableOpacity onPress={() => navigation.navigate('Game')} style={styles.button}>
       <Text style={styles.buttonText}>Start</Text>
