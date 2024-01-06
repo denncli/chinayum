@@ -5,6 +5,7 @@ const Game = () => {
   const [currentDishes, setCurrentDishes] = useState([]);
   const [correctDish, setCorrectDish] = useState(null);
   const [feedback, setFeedback] = useState({ message: '', isCorrect: '' });
+  const [score, setScore] = useState(0);
 
   const dishes = [
     { name: 'Xiā jiǎo - 虾饺', image: require('./assets/images/food/xia-jiao.jpg') },
@@ -19,7 +20,8 @@ const Game = () => {
     { name: 'Jiǎozi - 饺子', image: require('./assets/images/food/dumplings.jpg') },
     { name: 'Huǒguō - 火锅', image: require('./assets/images/food/hot-pot.jpg') },
     { name: 'Chǎomiàn - 炒面', image: require('./assets/images/food/chao-mian.png') },
-    { name: 'Cōngyóubǐng - 葱油饼', image: require('./assets/images/food/scallion-pancake.jpg') }
+    { name: 'Cōngyóubǐng - 葱油饼', image: require('./assets/images/food/scallion-pancake.jpg') },
+    { name: 'Huíguō ròu - 回锅肉', image: require('./assets/images/food/huiguorou.jpg') }
   ];
 
   useEffect(() => {
@@ -40,6 +42,7 @@ const Game = () => {
   const handleDishPress = dish => {
     if (dish.name === correctDish.name) {
       setFeedback({ message: 'Correct!', isCorrect: 'true' });
+      setScore(score + 1)
       setTimeout(() => {
         setFeedback({ message: '', isCorrect: '' });
         pickRandomDishes();
