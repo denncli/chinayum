@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { Dimensions, View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Game = () => {
+const Game = ({ navigation }) => {
   const [currentDishes, setCurrentDishes] = useState([]);
   const [correctDish, setCorrectDish] = useState(null);
   const [feedback, setFeedback] = useState({ message: '', isCorrect: '' });
   const [score, setScore] = useState(0);
+  const [numRounds, setNumRounds] = useState(0);
 
   const dishes = [
     { name: 'Xiā jiǎo - 虾饺', image: require('./assets/images/food/xia-jiao.jpg') },
@@ -28,6 +30,14 @@ const Game = () => {
     pickRandomDishes();
   }, []);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      setScore(0);
+      setNumRounds(0);
+      pickRandomDishes();
+    }, [])
+  );
+
   const pickRandomDishes = () => {
     let shuffled = [...dishes];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -40,12 +50,26 @@ const Game = () => {
   };
 
   const handleDishPress = dish => {
+    // TODO
+    // navigation.navigate('Summary')
+    // TODO
     if (dish.name === correctDish.name) {
+      // only award points for first try
+      if (feedback.isCorrect != 'false') {
+        // TODO BUG, clicking on correct one will arbitrarily increase score
+        setScore(score + 1)
+      }
+      setNumRounds(numRounds + 1)
       setFeedback({ message: 'Correct!', isCorrect: 'true' });
-      setScore(score + 1)
       setTimeout(() => {
         setFeedback({ message: '', isCorrect: '' });
-        pickRandomDishes();
+        // set it to one below the number of rounds you want to play, due to start at 0
+        if (numRounds < 2) {
+          pickRandomDishes();
+        } else {
+          // TODO BUG score displayed in summary is 1 less than actual
+          navigation.navigate('Summary', { score: score });
+        }  
       }, 1000);
     } else {
       setFeedback({ message: 'Wrong, try again.', isCorrect: 'false' });
@@ -54,9 +78,13 @@ const Game = () => {
       }, 2000);
     }
   };
-
+  
   return (
     <View style={styles.container}>
+      <View style={styles.statsContainer}>
+        <Text style={styles.scoreText}>Score: {score}</Text>
+        <Text style={styles.roundsText}>Rounds: {numRounds}</Text>
+      </View>
       {correctDish && <Text style={styles.title}>{correctDish.name}</Text>}
       <Text style={[styles.feedbackText, feedback.isCorrect === 'false' ? styles.incorrectFeedback : styles.correctFeedback]}>
         {feedback.message}
@@ -80,6 +108,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
+  },
+  statsContainer: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    padding: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    borderRadius: 20,
+    alignItems: 'flex-end',
+  },
+  scoreText: {
+    color: '#fff',
+    fontSize: 18,
+    marginBottom: 5, // Add a little space between score and rounds
+  },
+  roundsText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 18, // Slightly smaller font size for rounds
   },
   title: {
     fontSize: 24,
@@ -105,6 +152,19 @@ const styles = StyleSheet.create({
   },
   incorrectFeedback: {
     color: 'red',
+  },
+  scoreContainer: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    padding: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    borderRadius: 20,
+  },
+  scoreText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   }
 });
 
