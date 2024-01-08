@@ -8,6 +8,7 @@ const Game = ({ navigation }) => {
   const [feedback, setFeedback] = useState({ message: '', isCorrect: '' });
   const [score, setScore] = useState(0);
   const [numRounds, setNumRounds] = useState(0);
+  const [correctSelectionMade, setCorrectSelectionMade] = useState(false);
 
   const dishes = [
     { name: 'Xiā jiǎo - 虾饺', image: require('./assets/images/food/xia-jiao.jpg') },
@@ -21,9 +22,13 @@ const Game = ({ navigation }) => {
     { name: 'Chǎofàn - 炒饭', image: require('./assets/images/food/fried-rice.jpg') },
     { name: 'Jiǎozi - 饺子', image: require('./assets/images/food/dumplings.jpg') },
     { name: 'Huǒguō - 火锅', image: require('./assets/images/food/hot-pot.jpg') },
-    { name: 'Chǎomiàn - 炒面', image: require('./assets/images/food/chao-mian.png') },
+    { name: 'Chǎomiàn - 炒面', image: require('./assets/images/food/chao-mian.jpg') },
     { name: 'Cōngyóubǐng - 葱油饼', image: require('./assets/images/food/scallion-pancake.jpg') },
-    { name: 'Huíguō ròu - 回锅肉', image: require('./assets/images/food/huiguorou.jpg') }
+    { name: 'Huíguō ròu - 回锅肉', image: require('./assets/images/food/huiguorou.jpg') },
+    { name: 'Shāomài - 烧卖', image: require('./assets/images/food/shumai.jpg') },
+    { name: 'Běijīng kǎoyā - 北京烤鸭', image: require('./assets/images/food/peking-duck.jpg') },
+    { name: 'Yúxiāng qiézi - 鱼香茄子', image: require('./assets/images/food/qiezi.jpg') },
+    { name: 'Bāozi - 包子', image: require('./assets/images/food/baozi.jpg') }
   ];
 
   useEffect(() => {
@@ -50,28 +55,26 @@ const Game = ({ navigation }) => {
   };
 
   const handleDishPress = dish => {
-    // TODO
-    // navigation.navigate('Summary')
-    // TODO
-    if (dish.name === correctDish.name) {
+    if (dish.name === correctDish.name && !correctSelectionMade) {
+      // prevent user from arbitrarily increasing score with multiple presses
+      setCorrectSelectionMade(true);
       // only award points for first try
       if (feedback.isCorrect != 'false') {
-        // TODO BUG, clicking on correct one will arbitrarily increase score
         setScore(score + 1)
       }
       setNumRounds(numRounds + 1)
       setFeedback({ message: 'Correct!', isCorrect: 'true' });
       setTimeout(() => {
-        setFeedback({ message: '', isCorrect: '' });
-        // set it to one below the number of rounds you want to play, due to start at 0
-        if (numRounds < 2) {
+        if (numRounds < 3) {
+          setFeedback({ message: '', isCorrect: '' });
+          setCorrectSelectionMade(false);
           pickRandomDishes();
         } else {
           // TODO BUG score displayed in summary is 1 less than actual
           navigation.navigate('Summary', { score: score });
         }  
       }, 1000);
-    } else {
+    } else if (!correctSelectionMade) {
       setFeedback({ message: 'Wrong, try again.', isCorrect: 'false' });
       setTimeout(() => {
         setFeedback({ message: '', isCorrect: '' });
