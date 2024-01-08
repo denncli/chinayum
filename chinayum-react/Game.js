@@ -9,6 +9,7 @@ const Game = ({ navigation }) => {
   const [score, setScore] = useState(0);
   const [numRounds, setNumRounds] = useState(0);
   const [correctSelectionMade, setCorrectSelectionMade] = useState(false);
+  const [incorrectSelectionEverMade, setIncorrectSelectionEverMade] = useState(false);
 
   const dishes = [
     { name: 'Xiā jiǎo - 虾饺', image: require('./assets/images/food/xia-jiao.jpg') },
@@ -39,7 +40,7 @@ const Game = ({ navigation }) => {
     React.useCallback(() => {
       setScore(0);
       setNumRounds(0);
-      pickRandomDishes();
+      resetRound();
     }, [])
   );
 
@@ -58,28 +59,39 @@ const Game = ({ navigation }) => {
     if (dish.name === correctDish.name && !correctSelectionMade) {
       // prevent user from arbitrarily increasing score with multiple presses
       setCorrectSelectionMade(true);
+      let newScore = score;
       // only award points for first try
-      if (feedback.isCorrect != 'false') {
-        setScore(score + 1)
+      if (!incorrectSelectionEverMade) {
+        // handle async state update
+        newScore = score + 1;
+        setScore(newScore);
       }
-      setNumRounds(numRounds + 1)
+      // handle async state update
+      let newNumRounds = numRounds + 1;
+      setNumRounds(newNumRounds)
       setFeedback({ message: 'Correct!', isCorrect: 'true' });
       setTimeout(() => {
-        if (numRounds < 3) {
-          setFeedback({ message: '', isCorrect: '' });
-          setCorrectSelectionMade(false);
-          pickRandomDishes();
+        let MAX_ROUNDS = 10;
+        if (newNumRounds < MAX_ROUNDS) {
+          resetRound();
         } else {
-          // TODO BUG score displayed in summary is 1 less than actual
-          navigation.navigate('Summary', { score: score });
+          navigation.navigate('Summary', { score: newScore });
         }  
       }, 1000);
     } else if (!correctSelectionMade) {
+      setIncorrectSelectionEverMade(true);
       setFeedback({ message: 'Wrong, try again.', isCorrect: 'false' });
       setTimeout(() => {
         setFeedback({ message: '', isCorrect: '' });
       }, 2000);
     }
+  };
+
+  const resetRound = () => {
+    setFeedback({ message: '', isCorrect: '' });
+    setCorrectSelectionMade(false);
+    setIncorrectSelectionEverMade(false);
+    pickRandomDishes();
   };
   
   return (
