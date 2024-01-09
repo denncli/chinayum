@@ -10,6 +10,7 @@ const Game = ({ navigation }) => {
   const [numRounds, setNumRounds] = useState(0);
   const [correctSelectionMade, setCorrectSelectionMade] = useState(false);
   const [incorrectSelectionEverMade, setIncorrectSelectionEverMade] = useState(false);
+  const [usedCorrectDishesByName, setUsedCorrectDishesByName] = useState(new Set());
 
   const dishes = [
     { name: 'Xiā jiǎo - 虾饺', image: require('./assets/images/food/xia-jiao.jpg') },
@@ -29,7 +30,15 @@ const Game = ({ navigation }) => {
     { name: 'Shāomài - 烧卖', image: require('./assets/images/food/shumai.jpg') },
     { name: 'Běijīng kǎoyā - 北京烤鸭', image: require('./assets/images/food/peking-duck.jpg') },
     { name: 'Yúxiāng qiézi - 鱼香茄子', image: require('./assets/images/food/qiezi.jpg') },
-    { name: 'Bāozi - 包子', image: require('./assets/images/food/baozi.jpg') }
+    { name: 'Fānqié chǎo dàn - 番茄炒蛋', image: require('./assets/images/food/tomato-egg.jpg') },
+    { name: 'Bāozi - 包子', image: require('./assets/images/food/baozi.jpg') },
+    { name: 'Málà jī - 麻辣鸡', image: require('./assets/images/food/baozi.jpg') },
+    { name: 'Niúròu miàn - 牛肉面', image: require('./assets/images/food/beef-noodle-soup.jpg') },
+    { name: 'Xiao Long Bao - 小笼包', image: require('./assets/images/food/xiaolongbao.jpg') },
+    { name: 'Sheng Jian Bao - 生煎包', image: require('./assets/images/food/sheng-jian-bao.jpg') },
+    { name: 'Dan Dan Mian - 担担面', image: require('./assets/images/food/dandan-mian.jpg') },
+    { name: 'Ba Bao Fan - 八宝饭', image: require('./assets/images/food/ba-bao-fan.jpg') },
+    { name: 'Shī Zi Tóu - 狮子头', image: require('./assets/images/food/lion-head.jpg') }
   ];
 
   useEffect(() => {
@@ -40,19 +49,29 @@ const Game = ({ navigation }) => {
     React.useCallback(() => {
       setScore(0);
       setNumRounds(0);
+      setUsedCorrectDishesByName(new Set());
       resetRound();
     }, [])
   );
 
   const pickRandomDishes = () => {
-    let shuffled = [...dishes];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    let NUM_DISH_CHOICES = 3;
+    let currentDishesIndices = new Set();
+    while (currentDishesIndices.size < NUM_DISH_CHOICES) {
+      let randomDishIndex = Math.floor(Math.random() * dishes.length);
+      let randomDish = dishes[randomDishIndex];
+      if (!usedCorrectDishesByName.has(randomDish.name)) {
+        currentDishesIndices.add(randomDishIndex);
+      }
     }
-    let selected = shuffled.slice(0, 3);
-    setCurrentDishes(selected);
-    setCorrectDish(selected[Math.floor(Math.random() * selected.length)]);
+    let currentDishes = [];
+    currentDishesIndices.forEach(index => {
+      currentDishes.push(dishes[index]);
+    })
+    setCurrentDishes(currentDishes);
+    let correctDish = currentDishes[Math.floor(Math.random() * currentDishes.length)];
+    setCorrectDish(correctDish);
+    setUsedCorrectDishesByName(new Set(usedCorrectDishesByName).add(correctDish.name));
   };
 
   const handleDishPress = dish => {
@@ -116,6 +135,10 @@ const Game = ({ navigation }) => {
 };
 
 const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
+const isPortrait = screenWidth < screenHeight
+const imageWidthAndHeightInPortraitMode = screenHeight * 0.28;
+const imageWidthAndHeightInLandscapeMode = screenWidth * 0.3;
 
 const styles = StyleSheet.create({
   container: {
@@ -148,13 +171,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   dishesContainer: {
-    flexDirection: 'row',
+    flexDirection: isPortrait ? 'column' : 'row',
     justifyContent: 'space-around',
+    alignItems: 'center',
     width: '100%',
   },
   image: {
-    width: screenWidth * 0.3,
-    height: screenWidth * 0.3,
+    width: isPortrait ? imageWidthAndHeightInPortraitMode : imageWidthAndHeightInLandscapeMode,
+    height: isPortrait ? imageWidthAndHeightInPortraitMode : imageWidthAndHeightInLandscapeMode,
     margin: 5,
     resizeMode: 'contain',
   },
