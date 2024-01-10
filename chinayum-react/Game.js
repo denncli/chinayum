@@ -32,7 +32,7 @@ const Game = ({ navigation }) => {
     { name: 'Yúxiāng qiézi - 鱼香茄子', image: require('./assets/images/food/qiezi.jpg') },
     { name: 'Fānqié chǎo dàn - 番茄炒蛋', image: require('./assets/images/food/tomato-egg.jpg') },
     { name: 'Bāozi - 包子', image: require('./assets/images/food/baozi.jpg') },
-    { name: 'Málà jī - 麻辣鸡', image: require('./assets/images/food/baozi.jpg') },
+    { name: 'Málà jī - 麻辣鸡', image: require('./assets/images/food/mala-chicken.jpg') },
     { name: 'Niúròu miàn - 牛肉面', image: require('./assets/images/food/beef-noodle-soup.jpg') },
     { name: 'Xiao Long Bao - 小笼包', image: require('./assets/images/food/xiaolongbao.jpg') },
     { name: 'Sheng Jian Bao - 生煎包', image: require('./assets/images/food/sheng-jian-bao.jpg') },
