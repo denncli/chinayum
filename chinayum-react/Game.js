@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { Dimensions, View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import './custom-fonts.css';
 
 const Game = ({ navigation }) => {
   const [currentDishes, setCurrentDishes] = useState([]);
@@ -164,18 +165,18 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     marginBottom: 5, // Add a little space between score and rounds
-    fontFamily: 'OpenSans',
+    fontFamily: 'Nunito',
   },
   roundsText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 18, // Slightly smaller font size for rounds
-    fontFamily: 'OpenSans',
+    fontFamily: 'Nunito',
   },
   title: {
     fontSize: 24,
     marginBottom: 20,
-    fontFamily: 'OpenSans',
+    fontFamily: 'Nunito',
   },
   dishesContainer: {
     flexDirection: isPortrait ? 'column' : 'row',
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
   feedbackText: {
     fontSize: 18,
     marginBottom: 20,
-    fontFamily: 'OpenSans',
+    fontFamily: 'Nunito',
   },
   correctFeedback: {
     color: 'green',
@@ -212,7 +213,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
-    fontFamily: 'OpenSans',
+    fontFamily: 'Nunito',
   }
 });
 
