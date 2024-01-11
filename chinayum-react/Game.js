@@ -174,9 +174,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito',
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     marginBottom: 20,
     fontFamily: 'Nunito',
+    fontWeight: 'bold',
   },
   dishesContainer: {
     flexDirection: isPortrait ? 'column' : 'row',
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   feedbackText: {
-    fontSize: 18,
+    fontSize: 22,
     marginBottom: 20,
     fontFamily: 'Nunito',
   },
