@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import './custom-fonts.css';
 
 const Summary = ({ navigation, route }) => {
   const { score } = route.params;
@@ -39,11 +40,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     color: '#333', // Dark text for contrast
+    fontFamily: 'Nunito',
   },
   score: {
     fontSize: 24,
     color: '#666', // Slightly lighter text color
     marginBottom: 40,
+    fontFamily: 'Nunito',
   },
   button: {
     backgroundColor: '#007bff', // Bright blue for primary action
@@ -58,6 +61,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff', // White text for buttons
     fontSize: 18,
+    fontFamily: 'Nunito',
   },
 });
 
