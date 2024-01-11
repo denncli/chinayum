@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import './custom-fonts.css';
 
 const Instructions = ({ navigation }) => (
   <View style={styles.container}>
@@ -24,11 +25,13 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 20,
+    fontFamily: 'Nunito',
   },
   instructions: {
     fontSize: 18,
     textAlign: 'center',
     marginBottom: 20,
+    fontFamily: 'Nunito',
   },
   button: {
     backgroundColor: '#007bff',
@@ -38,6 +41,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 18,
+    fontFamily: 'Nunito',
   },
 });
 

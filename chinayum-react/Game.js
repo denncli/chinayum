@@ -34,11 +34,15 @@ const Game = ({ navigation }) => {
     { name: 'Bāozi - 包子', image: require('./assets/images/food/baozi.jpg') },
     { name: 'Málà jī - 麻辣鸡', image: require('./assets/images/food/mala-chicken.jpg') },
     { name: 'Niúròu miàn - 牛肉面', image: require('./assets/images/food/beef-noodle-soup.jpg') },
-    { name: 'Xiao Long Bao - 小笼包', image: require('./assets/images/food/xiaolongbao.jpg') },
-    { name: 'Sheng Jian Bao - 生煎包', image: require('./assets/images/food/sheng-jian-bao.jpg') },
-    { name: 'Dan Dan Mian - 担担面', image: require('./assets/images/food/dandan-mian.jpg') },
-    { name: 'Ba Bao Fan - 八宝饭', image: require('./assets/images/food/ba-bao-fan.jpg') },
-    { name: 'Shī Zi Tóu - 狮子头', image: require('./assets/images/food/lion-head.jpg') }
+    { name: 'Xiǎo Lóng Bāo - 小笼包', image: require('./assets/images/food/xiaolongbao.jpg') },
+    { name: 'Shēng Jiān Bāo - 生煎包', image: require('./assets/images/food/sheng-jian-bao.jpg') },
+    { name: 'Dàn Dàn Miàn - 担担面', image: require('./assets/images/food/dandan-mian.jpg') },
+    { name: 'Bā Bǎo Fàn - 八宝饭', image: require('./assets/images/food/ba-bao-fan.jpg') },
+    { name: 'Shī Zi Tóu - 狮子头', image: require('./assets/images/food/lion-head.jpg') },
+    { name: 'Zhá Jiàng Miàn - 炸酱面', image: require('./assets/images/food/zha-jiang-mian.jpg') },
+    { name: 'Lóngjǐng xiārén - 龙井虾仁', image: require('./assets/images/food/Lóngjǐngxiārén.jpg') },
+    { name: 'Yú Xiāng Ròu Sī - 鱼香肉丝', image: require('./assets/images/food/YúXiāngRòuSī.jpg') },
+    { name: 'Xūn Yú - 熏鱼', image: require('./assets/images/food/XūnYú.jpg') }
   ];
 
   useEffect(() => {
@@ -160,15 +164,18 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     marginBottom: 5, // Add a little space between score and rounds
+    fontFamily: 'OpenSans',
   },
   roundsText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 18, // Slightly smaller font size for rounds
+    fontFamily: 'OpenSans',
   },
   title: {
     fontSize: 24,
     marginBottom: 20,
+    fontFamily: 'OpenSans',
   },
   dishesContainer: {
     flexDirection: isPortrait ? 'column' : 'row',
@@ -185,6 +192,7 @@ const styles = StyleSheet.create({
   feedbackText: {
     fontSize: 18,
     marginBottom: 20,
+    fontFamily: 'OpenSans',
   },
   correctFeedback: {
     color: 'green',
@@ -204,6 +212,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'OpenSans',
   }
 });
 
