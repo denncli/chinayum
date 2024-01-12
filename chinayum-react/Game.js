@@ -41,9 +41,9 @@ const Game = ({ navigation }) => {
     { name: 'Bā Bǎo Fàn - 八宝饭', image: require('./assets/images/food/ba-bao-fan.jpg') },
     { name: 'Shī Zi Tóu - 狮子头', image: require('./assets/images/food/lion-head.jpg') },
     { name: 'Zhá Jiàng Miàn - 炸酱面', image: require('./assets/images/food/zha-jiang-mian.jpg') },
-    { name: 'Lóngjǐng xiārén - 龙井虾仁', image: require('./assets/images/food/Lóngjǐngxiārén.jpg') },
-    { name: 'Yú Xiāng Ròu Sī - 鱼香肉丝', image: require('./assets/images/food/YúXiāngRòuSī.jpg') },
-    { name: 'Xūn Yú - 熏鱼', image: require('./assets/images/food/XūnYú.jpg') }
+    { name: 'Lóngjǐng xiārén - 龙井虾仁', image: require('./assets/images/food/long-jing-xia-ren.jpg') },
+    { name: 'Yú Xiāng Ròu Sī - 鱼香肉丝', image: require('./assets/images/food/yu-xiang-rou-si.jpg') },
+    { name: 'Xūn Yú - 熏鱼', image: require('./assets/images/food/xun-yu.jpg') }
   ];
 
   useEffect(() => {
@@ -120,11 +120,11 @@ const Game = ({ navigation }) => {
   
   return (
     <View style={styles.container}>
+      {correctDish && <Text style={styles.title}>{correctDish.name}</Text>}
       <View style={styles.statsContainer}>
         <Text style={styles.scoreText}>Score: {score}</Text>
         <Text style={styles.roundsText}>Rounds: {numRounds}</Text>
       </View>
-      {correctDish && <Text style={styles.title}>{correctDish.name}</Text>}
       <Text style={[styles.feedbackText, feedback.isCorrect === 'false' ? styles.incorrectFeedback : styles.correctFeedback]}>
         {feedback.message}
       </Text>
@@ -142,7 +142,7 @@ const Game = ({ navigation }) => {
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 const isPortrait = screenWidth < screenHeight
-const imageWidthAndHeightInPortraitMode = screenHeight * 0.28;
+const imageWidthAndHeightInPortraitMode = screenHeight * 0.27;
 const imageWidthAndHeightInLandscapeMode = screenWidth * 0.3;
 
 const styles = StyleSheet.create({
@@ -153,29 +153,34 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   statsContainer: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    padding: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    alignSelf: 'center', // Centers in the parent container
+    width: 210,
+    // marginTop: 10, // Spacing from the top
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
     borderRadius: 20,
-    alignItems: 'flex-end',
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    marginBottom: 10,
   },
   scoreText: {
     color: '#fff',
+    fontWeight: 'bold',
     fontSize: 18,
-    marginBottom: 5, // Add a little space between score and rounds
     fontFamily: 'Nunito',
   },
   roundsText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 18, // Slightly smaller font size for rounds
+    fontSize: 18,
     fontFamily: 'Nunito',
   },
   title: {
     fontSize: 28,
-    marginBottom: 20,
+    marginBottom: 10,
     fontFamily: 'Nunito',
     fontWeight: 'bold',
   },
@@ -192,23 +197,16 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   feedbackText: {
-    fontSize: 22,
     marginBottom: 20,
     fontFamily: 'Nunito',
   },
   correctFeedback: {
+    fontSize: 25,
     color: 'green',
   },
   incorrectFeedback: {
+    fontSize: 22,
     color: 'red',
-  },
-  scoreContainer: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    padding: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    borderRadius: 20,
   },
   scoreText: {
     color: '#fff',
