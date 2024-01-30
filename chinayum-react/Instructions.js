@@ -1,9 +1,13 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import './custom-fonts.css';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import logo from './assets/logo.jpg';import './custom-fonts.css';
 
 const Instructions = ({ navigation }) => (
   <View style={styles.container}>
+    <Image
+      source={logo}
+      style={styles.logo}
+    />
     <Text style={styles.title}>Learn Chinese Dishes</Text>
     <Text style={styles.instructions}>
       Select the correct dish
@@ -20,15 +24,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: '#FEF5CD',
+  },
+  logo: {
+    width: 500,  // Set your desired width
+    height: 400, // Set your desired height
+    marginBottom: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 20,
     fontFamily: 'Nunito',
   },
   instructions: {
-    fontSize: 18,
+    fontSize: 22,
     textAlign: 'center',
     marginBottom: 20,
     fontFamily: 'Nunito',
@@ -40,7 +50,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: 'Nunito',
   },
 });
