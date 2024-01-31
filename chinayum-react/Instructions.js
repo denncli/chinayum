@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import logo from './assets/logo.jpg';import './custom-fonts.css';
+import logo from './assets/logo.jpg';
+import './custom-fonts.css';
 
 const Instructions = ({ navigation }) => (
   <View style={styles.container}>
@@ -8,12 +9,11 @@ const Instructions = ({ navigation }) => (
       source={logo}
       style={styles.logo}
     />
-    <Text style={styles.title}>Learn Chinese Dishes</Text>
     <Text style={styles.instructions}>
       Select the correct dish
     </Text>
     <TouchableOpacity onPress={() => navigation.navigate('Game')} style={styles.button}>
-      <Text style={styles.buttonText}>Start</Text>
+      <Text style={styles.buttonText}>Play</Text>
     </TouchableOpacity>
   </View>
 );
@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FEF5CD',
   },
   logo: {
-    width: 500,  // Set your desired width
-    height: 400, // Set your desired height
-    marginBottom: 20,
+    width: '100%', // arbitrarily high so that height controls size 
+    height: '60%',
+    resizeMode: 'contain',
   },
   title: {
     fontSize: 32,
@@ -44,9 +44,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito',
   },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#4D8764',
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 26,
+    shadowOpacity: 0.35,
+    shadowRadius: 8,
   },
   buttonText: {
     color: '#fff',

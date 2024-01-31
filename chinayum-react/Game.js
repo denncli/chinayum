@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
+    backgroundColor: '#FEF5CD',
   },
   statsContainer: {
     display: 'flex',
@@ -159,12 +159,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center', // Centers in the parent container
     width: 210,
-    // marginTop: 10, // Spacing from the top
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
     borderRadius: 20,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    marginBottom: 10,
+    marginBottom: isPortrait ? 4 : 10,
   },
   scoreText: {
     color: '#fff',
@@ -180,7 +179,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    marginBottom: 10,
+    marginBottom: isPortrait ? 0 : 10,
     fontFamily: 'Nunito',
     fontWeight: 'bold',
   },
@@ -193,19 +192,19 @@ const styles = StyleSheet.create({
   image: {
     width: isPortrait ? imageWidthAndHeightInPortraitMode : imageWidthAndHeightInLandscapeMode,
     height: isPortrait ? imageWidthAndHeightInPortraitMode : imageWidthAndHeightInLandscapeMode,
-    margin: 5,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
+    borderRadius: 8,
+    margin: 3
   },
   feedbackText: {
-    marginBottom: 20,
     fontFamily: 'Nunito',
+    marginBottom : 4,
+    fontSize: 22,
   },
   correctFeedback: {
-    fontSize: 25,
     color: 'green',
   },
   incorrectFeedback: {
-    fontSize: 22,
     color: 'red',
   },
   scoreText: {
