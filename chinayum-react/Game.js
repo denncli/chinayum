@@ -14,36 +14,43 @@ const Game = ({ navigation }) => {
   const [usedCorrectDishesByName, setUsedCorrectDishesByName] = useState(new Set());
 
   const dishes = [
-    { name: 'Xiā jiǎo - 虾饺', image: require('./assets/images/food/xia-jiao.jpg') },
-    { name: 'Gān biān sì jì dòu - 干煸四季豆', image: require('./assets/images/food/gan-bian-si-ji-dou.jpg') },
-    { name: 'Hóng shāo ròu - 红烧肉', image: require('./assets/images/food/hong-shao-rou.jpg') },
-    { name: 'Dàn tǎ - 蛋挞', image: require('./assets/images/food/dan-ta.jpg') },
-    { name: 'Mápó dòufu - 麻婆豆腐', image: require('./assets/images/food/mapo-tofu.jpg') },
-    { name: 'Yánshuǐ yā - 盐水鸭', image: require('./assets/images/food/yan-shui-ya.jpg') },
-    { name: 'Qīngcài / Xiǎo báicài - 青菜 / 小白菜', image: require('./assets/images/food/qing-cai.jpg') },
-    { name: 'Húntun tāng - 馄饨汤', image: require('./assets/images/food/wonton-soup.jpg') },
+    { name: 'Xiā Jiǎo - 虾饺', image: require('./assets/images/food/xia-jiao.jpg') },
+    { name: 'Gān Biān Sì Jì Dòu - 干煸四季豆', image: require('./assets/images/food/gan-bian-si-ji-dou.jpg') },
+    { name: 'Hóng Shāo Ròu - 红烧肉', image: require('./assets/images/food/hong-shao-rou.jpg') },
+    { name: 'Dàn Tǎ - 蛋挞', image: require('./assets/images/food/dan-ta.jpg') },
+    { name: 'Mápó Dòufu - 麻婆豆腐', image: require('./assets/images/food/mapo-tofu.jpg') },
+    { name: 'Yánshuǐ Yā - 盐水鸭', image: require('./assets/images/food/yan-shui-ya.jpg') },
+    { name: 'Qīngcài / Xiǎo Báicài - 青菜 / 小白菜', image: require('./assets/images/food/qing-cai.jpg') },
+    { name: 'Húntun Tāng - 馄饨汤', image: require('./assets/images/food/wonton-soup.jpg') },
     { name: 'Chǎofàn - 炒饭', image: require('./assets/images/food/fried-rice.jpg') },
     { name: 'Jiǎozi - 饺子', image: require('./assets/images/food/dumplings.jpg') },
     { name: 'Huǒguō - 火锅', image: require('./assets/images/food/hot-pot.jpg') },
     { name: 'Chǎomiàn - 炒面', image: require('./assets/images/food/chao-mian.jpg') },
     { name: 'Cōngyóubǐng - 葱油饼', image: require('./assets/images/food/scallion-pancake.jpg') },
-    { name: 'Huíguō ròu - 回锅肉', image: require('./assets/images/food/huiguorou.jpg') },
+    { name: 'Huíguō Ròu - 回锅肉', image: require('./assets/images/food/huiguorou.jpg') },
     { name: 'Shāomài - 烧卖', image: require('./assets/images/food/shumai.jpg') },
-    { name: 'Běijīng kǎoyā - 北京烤鸭', image: require('./assets/images/food/peking-duck.jpg') },
-    { name: 'Yúxiāng qiézi - 鱼香茄子', image: require('./assets/images/food/qiezi.jpg') },
-    { name: 'Fānqié chǎo dàn - 番茄炒蛋', image: require('./assets/images/food/tomato-egg.jpg') },
+    { name: 'Běijīng Kǎoyā - 北京烤鸭', image: require('./assets/images/food/peking-duck.jpg') },
+    { name: 'Yúxiāng Qiézi - 鱼香茄子', image: require('./assets/images/food/qiezi.jpg') },
+    { name: 'Fānqié Chǎo Dàn - 番茄炒蛋', image: require('./assets/images/food/tomato-egg.jpg') },
     { name: 'Bāozi - 包子', image: require('./assets/images/food/baozi.jpg') },
-    { name: 'Málà jī - 麻辣鸡', image: require('./assets/images/food/mala-chicken.jpg') },
-    { name: 'Niúròu miàn - 牛肉面', image: require('./assets/images/food/beef-noodle-soup.jpg') },
+    { name: 'Málà Jī - 麻辣鸡', image: require('./assets/images/food/mala-chicken.jpg') },
+    { name: 'Niúròu Miàn - 牛肉面', image: require('./assets/images/food/beef-noodle-soup.jpg') },
     { name: 'Xiǎo Lóng Bāo - 小笼包', image: require('./assets/images/food/xiaolongbao.jpg') },
     { name: 'Shēng Jiān Bāo - 生煎包', image: require('./assets/images/food/sheng-jian-bao.jpg') },
     { name: 'Dàn Dàn Miàn - 担担面', image: require('./assets/images/food/dandan-mian.jpg') },
     { name: 'Bā Bǎo Fàn - 八宝饭', image: require('./assets/images/food/ba-bao-fan.jpg') },
     { name: 'Shī Zi Tóu - 狮子头', image: require('./assets/images/food/lion-head.jpg') },
     { name: 'Zhá Jiàng Miàn - 炸酱面', image: require('./assets/images/food/zha-jiang-mian.jpg') },
-    { name: 'Lóngjǐng xiārén - 龙井虾仁', image: require('./assets/images/food/long-jing-xia-ren.jpg') },
+    { name: 'Lóngjǐng Xiārén - 龙井虾仁', image: require('./assets/images/food/long-jing-xia-ren.jpg') },
     { name: 'Yú Xiāng Ròu Sī - 鱼香肉丝', image: require('./assets/images/food/yu-xiang-rou-si.jpg') },
-    { name: 'Xūn Yú - 熏鱼', image: require('./assets/images/food/xun-yu.jpg') }
+    { name: 'Xūn Yú - 熏鱼', image: require('./assets/images/food/xun-yu.jpg') },
+    { name: 'Jiāo Yán Pái Gǔ - 椒盐排骨', image: require('./assets/images/food/jiao-yan-pai-gu.jpg') },
+    { name: 'Làzǐ Jī Dīng - 辣子鸡丁', image: require('./assets/images/food/la-zi-ji-ding.jpg') },
+    { name: 'Fèng Zhǎo - 鳯爪', image: require('./assets/images/food/feng-zhao.jpg') },
+    { name: 'Jiāo Yán Níu Ròu - 椒盐牛肉', image: require('./assets/images/food/jiao-yan-niu-rou.jpg') },
+    { name: 'Níu Ròu Tāng - 牛肉汤', image: require('./assets/images/food/niu-rou-tang.jpg') },
+    { name: 'Táng Cù Pái Gǔ - 糖醋排骨', image: require('./assets/images/food/tang-cu-pai-gu.jpg') },
+    { name: 'Kōnɡ Bǎo Jī Dīng - 宫保鸡丁', image: require('./assets/images/food/kong-pao-ji-ding.jpg') }
   ];
 
   useEffect(() => {
@@ -104,7 +111,7 @@ const Game = ({ navigation }) => {
       }, 1000);
     } else if (!correctSelectionMade) {
       setIncorrectSelectionEverMade(true);
-      setFeedback({ message: 'Wrong, try again.', isCorrect: 'false' });
+      setFeedback({ message: 'Wrong, try again', isCorrect: 'false' });
       setTimeout(() => {
         setFeedback({ message: '', isCorrect: '' });
       }, 2000);
@@ -163,7 +170,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    marginBottom: isPortrait ? 4 : 10,
+    marginBottom: isPortrait ? 4 : '3.5%',
   },
   scoreText: {
     color: '#fff',
