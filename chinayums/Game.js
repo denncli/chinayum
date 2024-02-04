@@ -50,7 +50,15 @@ const Game = ({ navigation }) => {
     { name: 'Jiāo Yán Níu Ròu - 椒盐牛肉', image: require('./assets/images/food/jiao-yan-niu-rou.jpg') },
     { name: 'Níu Ròu Tāng - 牛肉汤', image: require('./assets/images/food/niu-rou-tang.jpg') },
     { name: 'Táng Cù Pái Gǔ - 糖醋排骨', image: require('./assets/images/food/tang-cu-pai-gu.jpg') },
-    { name: 'Kōnɡ Bǎo Jī Dīng - 宫保鸡丁', image: require('./assets/images/food/kong-pao-ji-ding.jpg') }
+    { name: 'Kōnɡ Bǎo Jī Dīng - 宫保鸡丁', image: require('./assets/images/food/kong-pao-ji-ding.jpg') },
+    { name: 'Shuǐ Zhǔ Yú - 水煮鱼', image: require('./assets/images/food/shui-zhu-yu.jpg') },
+    { name: 'Zòng Zǐ - 粽子', image: require('./assets/images/food/zonzi.jpg') },
+    { name: 'Zhōu - 粥', image: require('./assets/images/food/zhou.jpg') },
+    { name: 'Dào Xiāo Miàn - 刀削面', image: require('./assets/images/food/dao-xiao-mian.jpg') },
+    { name: 'Yóu Tiáo - 油条', image: require('./assets/images/food/you-tiao.jpg') },
+    { name: 'Sūn Jiān - 笋尖', image: require('./assets/images/food/sun-jian.jpg') },
+    { name: 'Nǎi Huáng Bāo - 奶黄包', image: require('./assets/images/food/nai-huang-bao.jpg') },
+    { name: 'Hēi Zhīma Jī - 黑芝麻鸡', image: require('./assets/images/food/sesame-chicken.jpg') },
   ];
 
   useEffect(() => {
@@ -170,7 +178,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    marginBottom: isPortrait ? 4 : '3.5%',
+    marginBottom: isPortrait ? 4 : '3%',
   },
   scoreText: {
     color: '#fff',

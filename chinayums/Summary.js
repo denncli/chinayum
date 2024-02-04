@@ -7,7 +7,6 @@ const Summary = ({ navigation, route }) => {
   const { score } = route.params;
 
   const handleReplay = () => {
-    // Navigate back to Game and reset the game state if necessary
     navigation.navigate('Game');
   };
 

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "chinayum-react",
-    "slug": "chinayum-react",
+    "name": "chinayums",
+    "slug": "chinayums",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
