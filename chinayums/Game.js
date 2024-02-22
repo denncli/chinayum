@@ -144,7 +144,7 @@ const Game = ({ navigation, route }) => {
   };
   
   return (
-    <TouchableOpacity activeOpacity={1} style={StyleSheet.absoluteFill} onPress={continueToNextRound}>
+    <TouchableOpacity activeOpacity={1} style={styles.continueToNextRoundTouchable} onPress={continueToNextRound}>
       <View style={styles.container}>
         {correctDish && (
           <Text style={styles.title}>
@@ -178,6 +178,9 @@ const imageWidthAndHeightInPortraitMode = screenHeight * 0.27;
 const imageWidthAndHeightInLandscapeMode = screenWidth * 0.3;
 
 const styles = StyleSheet.create({
+  continueToNextRoundTouchable: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
