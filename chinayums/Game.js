@@ -3,7 +3,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { Dimensions, View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import './custom-fonts.css';
 
-const Game = ({ navigation }) => {
+const Game = ({ navigation, route }) => {
   const [currentDishes, setCurrentDishes] = useState([]);
   const [correctDish, setCorrectDish] = useState(null);
   const [feedback, setFeedback] = useState({ message: '', isCorrect: '' });
@@ -12,6 +12,8 @@ const Game = ({ navigation }) => {
   const [correctSelectionMade, setCorrectSelectionMade] = useState(false);
   const [incorrectSelectionEverMade, setIncorrectSelectionEverMade] = useState(false);
   const [usedCorrectDishesByName, setUsedCorrectDishesByName] = useState(new Set());
+  const [hidePinyin, setHidePinyin] = useState(route.params?.hidePinyin ?? false);
+  const [isReadyForNextRound, setIsReadyForNextRound] = useState(false);
 
   const dishes = [
     { name: 'Xiā Jiǎo - 虾饺', image: require('./assets/images/food/xia-jiao.jpg') },
@@ -95,6 +97,11 @@ const Game = ({ navigation }) => {
   };
 
   const handleDishPress = dish => {
+    // press on the dishes (or anywhere else) to continue the game once ready
+    if (isReadyForNextRound) {
+      continueToNextRound();
+      return;
+    }
     if (dish.name === correctDish.name && !correctSelectionMade) {
       // prevent user from arbitrarily increasing score with multiple presses
       setCorrectSelectionMade(true);
@@ -105,24 +112,14 @@ const Game = ({ navigation }) => {
         newScore = score + 1;
         setScore(newScore);
       }
-      // handle async state update
       let newNumRounds = numRounds + 1;
-      setNumRounds(newNumRounds)
-      setFeedback({ message: 'Correct!', isCorrect: 'true' });
-      setTimeout(() => {
-        let MAX_ROUNDS = 10;
-        if (newNumRounds < MAX_ROUNDS) {
-          resetRound();
-        } else {
-          navigation.navigate('Summary', { score: newScore });
-        }  
-      }, 1000);
+      setNumRounds(newNumRounds);
+      setFeedback({ message: 'Correct! Press anywhere to continue', isCorrect: 'true' });
+      setHidePinyin(false);
+      setIsReadyForNextRound(true);
     } else if (!correctSelectionMade) {
       setIncorrectSelectionEverMade(true);
       setFeedback({ message: 'Wrong, try again', isCorrect: 'false' });
-      setTimeout(() => {
-        setFeedback({ message: '', isCorrect: '' });
-      }, 2000);
     }
   };
 
@@ -130,27 +127,47 @@ const Game = ({ navigation }) => {
     setFeedback({ message: '', isCorrect: '' });
     setCorrectSelectionMade(false);
     setIncorrectSelectionEverMade(false);
+    setHidePinyin(route.params?.hidePinyin ?? false)
     pickRandomDishes();
+  };
+
+  const continueToNextRound = () => {
+    if (isReadyForNextRound) {
+      setIsReadyForNextRound(false); // Reset the waiting state
+      let MAX_ROUNDS = 10;
+      if (numRounds < MAX_ROUNDS) {
+        resetRound();
+      } else {
+        navigation.navigate('Summary', { score });
+      }
+    }
   };
   
   return (
-    <View style={styles.container}>
-      {correctDish && <Text style={styles.title}>{correctDish.name}</Text>}
-      <View style={styles.statsContainer}>
-        <Text style={styles.scoreText}>Score: {score}</Text>
-        <Text style={styles.roundsText}>Rounds: {numRounds}</Text>
+    <TouchableOpacity activeOpacity={1} style={StyleSheet.absoluteFill} onPress={continueToNextRound}>
+      <View style={styles.container}>
+        {correctDish && (
+          <Text style={styles.title}>
+            {/* Conditionally display dish name with or without pinyin (hacky way)*/}
+            {hidePinyin ? correctDish.name.split(' - ')[1] : correctDish.name}
+          </Text>
+        )}
+        <View style={styles.statsContainer}>
+          <Text style={styles.scoreText}>Score: {score}</Text>
+          <Text style={styles.roundsText}>Rounds: {numRounds}</Text>
+        </View>
+        <Text style={[styles.feedbackText, feedback.isCorrect === 'false' ? styles.incorrectFeedback : styles.correctFeedback]}>
+          {feedback.message}
+        </Text>
+        <View style={styles.dishesContainer}>
+          {currentDishes.map((dish, index) => (
+            <TouchableOpacity key={index} onPress={() => handleDishPress(dish)}>
+              <Image source={dish.image} style={styles.image} />
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
-      <Text style={[styles.feedbackText, feedback.isCorrect === 'false' ? styles.incorrectFeedback : styles.correctFeedback]}>
-        {feedback.message}
-      </Text>
-      <View style={styles.dishesContainer}>
-        {currentDishes.map((dish, index) => (
-          <TouchableOpacity key={index} onPress={() => handleDishPress(dish)}>
-            <Image source={dish.image} style={styles.image} />
-          </TouchableOpacity>
-        ))}
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
